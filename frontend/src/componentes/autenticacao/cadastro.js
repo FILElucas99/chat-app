@@ -192,7 +192,7 @@ const Signup = () => {
         onClick={submitHandler}
         isLoading={picLoading}
       >
-        Sign Up
+        Cadastrar
       </Button>
     </VStack>
   );

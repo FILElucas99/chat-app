@@ -112,7 +112,7 @@ const Cadastro = () => {
           setPassword("123456");
         }}
       >
-        Get Guest User Credentials
+        Obtenha credenciais de usuário convidado
       </Button>
     </VStack>
   );
