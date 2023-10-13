@@ -21,7 +21,7 @@ const Cadastro = () => {
     setLoading(true);
     if (!email || !password) {
       toast({
-        title: "Please Fill all the Feilds",
+        title: "Por favor, preencha todos os campos",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -45,7 +45,7 @@ const Cadastro = () => {
       );
 
       toast({
-        title: "Login Successful",
+        title: "Login bem-sucedido!",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -56,7 +56,7 @@ const Cadastro = () => {
       history.push("/chats");
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Erro inesperado",
         description: error.response.data.message,
         status: "error",
         duration: 5000,
@@ -74,7 +74,7 @@ const Cadastro = () => {
         <Input
           value={email}
           type="email"
-          placeholder="Enter Your Email Address"
+          placeholder="Insira seu email"
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
@@ -85,10 +85,10 @@ const Cadastro = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={show ? "text" : "password"}
-            placeholder="Enter password"
+            placeholder="Insira sua senha"
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button h="1.75rem" size="sm" onClick={handleClick} bg={"transparent"} backdropFilter="blur(20px)">
               {show ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
