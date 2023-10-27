@@ -54,6 +54,7 @@ const Cadastro = () => {
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
       history.push("/chats");
+      window.location.reload();
     } catch (error) {
       toast({
         title: "Erro inesperado",
@@ -70,7 +71,7 @@ const Cadastro = () => {
   return (
     <VStack spacing="10px">
       <FormControl id="email" isRequired>
-        <FormLabel>Email Address</FormLabel>
+        <FormLabel>Email</FormLabel>
         <Input
           value={email}
           type="email"
@@ -79,7 +80,7 @@ const Cadastro = () => {
         />
       </FormControl>
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>Senha</FormLabel>
         <InputGroup size="md">
           <Input
             value={password}
