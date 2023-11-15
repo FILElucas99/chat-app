@@ -114,7 +114,7 @@ const handleSearch = async () => {
                 </Tooltip>
 
                 <Text fontSize="2xl" fontFamily="Work sans">
-                    TalkTime
+                    EasyTalk
                 </Text>
                 <div>
                     <Menu>

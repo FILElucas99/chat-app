@@ -5,11 +5,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getSender } from "../config/ChatLogics";
 import ChatLoading from "./ChatLoading";
+import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { Button } from "@chakra-ui/react";
 import { ChatState } from "../Context/ChatProvider";
-import GroupChatModal from "./miscellaneous/GroupChatModal";
 
-const MeusChats = ({ fetchAgain }) => {
+const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
 
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
@@ -30,7 +30,7 @@ const MeusChats = ({ fetchAgain }) => {
     } catch (error) {
       toast({
         title: "Error Occured!",
-        description: "Falha ao carregar o chat",
+        description: "Failed to Load the chats",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -42,12 +42,12 @@ const MeusChats = ({ fetchAgain }) => {
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
+    // eslint-disable-next-line
   }, [fetchAgain]);
 
   return (
     <Box
-      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
-      backdropFilter="blur(20px)"
+      d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -61,24 +61,24 @@ const MeusChats = ({ fetchAgain }) => {
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
         fontFamily="Work sans"
-        display="flex"
+        d="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
       >
-        Meus Chats
+        My Chats
         <GroupChatModal>
           <Button
-            display="flex"
+            d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
           >
-            Novo Chat de Grupo
+            New Group Chat
           </Button>
         </GroupChatModal>
       </Box>
       <Box
-        display="flex"
+        d="flex"
         flexDir="column"
         p={3}
         bg="#F8F8F8"
@@ -124,4 +124,4 @@ const MeusChats = ({ fetchAgain }) => {
   );
 };
 
-export default MeusChats;
+export default MyChats;
