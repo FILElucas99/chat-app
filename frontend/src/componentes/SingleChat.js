@@ -1,7 +1,7 @@
 // import React, { Profiler } from 'react'
 import { ChatState } from '../Context/ChatProvider'
 import { Box, Text } from "@chakra-ui/layout";
-import { FormControl, IconButton, Input, Spinner, useToast } from "@chakra-ui/react";
+import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import Perfil from "./miscellaneous/Perfil";
@@ -11,6 +11,8 @@ import axios from "axios";
 import "./styles.css";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
+import { FormControl } from "@chakra-ui/form-control";
+import { Input } from "@chakra-ui/input";
 
 const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
 var socket, selectedChatCompare;
@@ -24,7 +26,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [typing, setTyping] = useState(false);
     const [istyping, setIsTyping] = useState(false);
 
-    const { user, selectedChat, setSelectedChat } = ChatState();
+    const { user, selectedChat, setSelectedChat, setNotification, notification } = ChatState();
     const toast = useToast();
 
     const fetchMessages = async () => {
@@ -115,10 +117,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             !selectedChatCompare || // if chat is not selected or doesn't match current chat
             selectedChatCompare._id !== newMessageRecieved.chat._id
           ) {
-            // if (!notification.includes(newMessageRecieved)) {
-            //   setNotification([newMessageRecieved, ...notification]);
-            //   setFetchAgain(!fetchAgain);
-            // }
+            if (!notification.includes(newMessageRecieved)) {
+              setNotification([newMessageRecieved, ...notification]);
+              setFetchAgain(!fetchAgain);
+            }
           } else {
             setMessages([...messages, newMessageRecieved]);
           }
@@ -161,24 +163,28 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     alignItems="center"
                 >
                     <IconButton
-                        display="flex"
+                        display={{ base: "flex", md: "none" }}
                         icon={<ArrowBackIcon />}
                         onClick={() => setSelectedChat("")}
                     />
-                    {!selectedChat.isGroupChat ? (
-                        <> {getSender(user,selectedChat.users)}
-                        <Perfil user={getSenderFull(user,selectedChat.users)}/>
-                        </>
-                    ) : (
-                        <>
-                            {selectedChat.chatName.toUpperCase()}
-                            {<UpdateGroupChat
-                            fetchAgain={fetchAgain}
-                            setFetchAgain={setFetchAgain}
-                            fetchMessages={fetchMessages}
-                        />}
+            {messages &&
+                  (!selectedChat.isGroupChat ? (
+                    <>
+                      {getSender(user, selectedChat.users)}
+                      <Perfil
+                        user={getSenderFull(user, selectedChat.users)}
+                      />
                     </>
-                    )}
+                  ) : (
+                    <>
+                      {selectedChat.chatName.toUpperCase()}
+                      <UpdateGroupChat
+                        fetchMessages={fetchMessages}
+                        fetchAgain={fetchAgain}
+                        setFetchAgain={setFetchAgain}
+                      />
+                    </>
+                  ))}
                 </Text>
                 <Box   
                     display="flex"
@@ -205,7 +211,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                         </div>
                     )}
 
-                    <FormControl onKeyDown={sendMessage} isRequired  mt={3}>
+                    <FormControl onKeyDown={sendMessage} id="first-name" isRequired  mt={3}>
                         {istyping ? <div><span style={{ color: '#38B2AC', fontFamily: "Work sans", marginLeft: '5px' }}>digitando</span></div>:<></>}
                         <Input 
                         variant="filled"

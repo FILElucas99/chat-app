@@ -1,13 +1,14 @@
 import { Box } from "@chakra-ui/layout";
 import { ChatState } from "../Context/ChatProvider";  
 import SingleChat from "./SingleChat";
+import "./styles.css";
 
 const ChatBox = ({ fetchAgain, setFetchAgain }) => {
   const { selectChat } = ChatState ();
 
   return (
     <Box 
-      display={{ base: selectChat ? "flex" : "none", md: "flex" }}
+      d={{ base: selectChat ? "flex" : "none", md: "flex" }}
       alignItems="center"
       flexDir="column"
       p={3}
