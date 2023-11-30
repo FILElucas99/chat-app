@@ -19,7 +19,7 @@ const SideDrawer = () => {
 
     const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
     const history = useHistory();
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const logout = () => {
         localStorage.removeItem("userInfo");
@@ -129,7 +129,7 @@ const handleSearch = async () => {
                             <BellIcon fontSize="2xl" m={1}/>
                         </MenuButton>
                         <MenuList pl={2}>
-                         {!notification.length && "No New Messages"}
+                         {!notification.length && "Sem mensagens novas"}
                          {notification.map((notif) => (
                           <MenuItem
                             key={notif._id}
@@ -139,8 +139,8 @@ const handleSearch = async () => {
                             }}
                           >
                             {notif.chat.isGroupChat
-                              ? `New Message in ${notif.chat.chatName}`
-                              : `New Message from ${getSender(user, notif.chat.users)}`}
+                              ? `Nova mensagem em ${notif.chat.chatName}`
+                              : `Nova mensagem de ${getSender(user, notif.chat.users)}`}
                           </MenuItem>
                         ))}
                         </MenuList>
@@ -171,7 +171,7 @@ const handleSearch = async () => {
                     <DrawerBody>
                         <Box display={"flex"} pb={2}>
                             <Input 
-                                placeholder="Procurar pelo nome ou email"
+                                placeholder="nome ou email"
                                 mr={2}
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}/>
@@ -181,7 +181,7 @@ const handleSearch = async () => {
                         (
                             searchResult?.map((user) => (
                                 <UserListItem key={user._id} 
-                                user={user} 
+                                userData={user} 
                                 handleFunction={() => accessChat(user._id)}/>
                             ))
                         )}

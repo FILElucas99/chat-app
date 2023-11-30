@@ -81,9 +81,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
         config
       );
-
-      console.log(data._id);
-      // setSelectedChat("");
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       setRenameLoading(false);
@@ -233,7 +230,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             </Box>
             <FormControl display="flex">
               <Input
-                placeholder="Chat Name"
+                placeholder="Nome do Chat"
                 mb={3}
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
@@ -245,12 +242,12 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 isLoading={renameloading}
                 onClick={handleRename}
               >
-                Update
+                Atualizar
               </Button>
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add User to group"
+                placeholder="Adicionar novo usuário ao grupo"
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
@@ -262,7 +259,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
               searchResult?.map((user) => (
                 <UserListItem
                   key={user._id}
-                  user={user}
+                  userData={user}
                   handleFunction={() => handleAddUser(user)}
                 />
               ))
@@ -270,7 +267,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => handleRemove(user)} colorScheme="red">
-              Leave Group
+              Sair do grupo
             </Button>
           </ModalFooter>
         </ModalContent>
