@@ -37,7 +37,7 @@ function Homepage() {
 
       >
         <Text fontSize="4xl" fontFamily="Work sans">
-          Easy Talk
+          EasyTalk
         </Text>
       </Box>
       <Box bg="transparent" w="100%" p={4} borderRadius="lg" borderWidth="1px" backdropFilter="blur(20px)">
